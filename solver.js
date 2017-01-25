@@ -46,6 +46,31 @@ var hasColConflict = function(board, colNum) {
   return false;
 };
 
+var hasBlockConflict = function(board, blockNum) {
+  var used = {};
+
+  var rowStart = Math.floor(blockNum / 3) * 3;
+  var colStart = (blockNum % 3) * 3;
+
+  // console.log('rowstart is', rowStart);
+  // console.log('colStart is', colStart);
+
+  for (var i = rowStart; i < rowStart + 3; i++) {
+    for (var j = colStart; j < colStart + 3; j++) {
+      if (board[i][j]) {
+        if (used[board[i][j]]) {
+          return true;
+        } else {
+          used[board[i][j]] = true;
+        }
+      }
+    }
+  }
+
+  return false;
+};
+
 
 //console.log(hasRowConflict(board, 0));
-console.log(hasColConflict(board, 0));
+//console.log(hasColConflict(board, 0));
+console.log(hasBlockConflict(board, 0));
