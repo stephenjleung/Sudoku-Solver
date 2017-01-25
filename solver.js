@@ -30,5 +30,22 @@ var hasRowConflict = function(board, rowNum) {
   return false;
 };
 
+var hasColConflict = function(board, colNum) {
+  var used = {};
 
-console.log(hasRowConflict(board, 0));
+  for (var i = 0; i < 9; i++) {
+    if (board[i][colNum]) {
+      if (used[board[i][colNum]]) {
+        return true;
+      } else {
+        used[board[i][colNum]] = true;
+      }
+    }
+  }
+
+  return false;
+};
+
+
+//console.log(hasRowConflict(board, 0));
+console.log(hasColConflict(board, 0));
