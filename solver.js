@@ -101,27 +101,24 @@ Sudoku.prototype.resetCell = function(row, col) {
   this.board[row][col] = 0;
 };
 
+Sudoku.prototype.resetBoard = function() {
+  for (var i = 0; i < 9; i++) {
+    for (var j = 0; j < 9; j++) {
+      if (this.board[i][j] !== this.initialBoard[i][j]) {
+        this.board[i][j] = this.initialBoard[i][j];  
+      }
+    }
+  }
+};
+
 
 //console.log(hasRowConflict(board, 0));
 //console.log(hasColConflict(board, 0));
 //console.log(hasBlockConflict(board, 0));
 //console.log(hasBoardConflict(board));
 
+
 var easyBoard = [
-
-  [5, 1, null, null, null, null, null, null, null],
-  [2, null, 4, null, null, 9, null, null, 1],
-  [null, 9, 6, null, 1, null, null, 8, null],
-  [null, null, 8, 2, null, null, 4, 9, 5],
-  [null, 5, null, 9, null, null, null, null, 3],
-  [9, 3, null, null, null, 1, 8, 6, null],
-  [3, null, null, null, 9, null, 7, null, null],
-  [null, null, 9, 1, 5, 4, 2, null, null],
-  [6, 2, null, 7, null, 8, null, 5, null]
-
-];
-
-var easyBoard2 = [
 
   [5, 1, 0, 0, 0, 0, 0, 0, 0],
   [2, 0, 4, 0, 0, 9, 0, 0, 1],
@@ -135,9 +132,18 @@ var easyBoard2 = [
 
 ];
 
-var s = new Sudoku(easyBoard2);
+var s = new Sudoku(easyBoard);
 
 console.log(s.hasBoardConflict());
 console.log(s.board);
 console.log(s.containsInitialValue(8,8));
 
+s.board[8][8] = 9;
+s.board[7][8] = 9;
+s.board[0][8] = 9;
+
+console.log(s.board);
+
+s.resetBoard();
+
+console.log(s.board)
