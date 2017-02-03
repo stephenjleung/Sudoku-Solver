@@ -94,6 +94,13 @@ Sudoku.prototype.containsInitialValue = function(row, col) {
   return false;
 };
 
+Sudoku.prototype.resetCell = function(row, col) {
+  if (this.initialBoard[row][col]) {
+    console.error('Error: Attempted to alter an initial board cell');
+  }
+  this.board[row][col] = 0;
+};
+
 
 //console.log(hasRowConflict(board, 0));
 //console.log(hasColConflict(board, 0));
@@ -133,3 +140,4 @@ var s = new Sudoku(easyBoard2);
 console.log(s.hasBoardConflict());
 console.log(s.board);
 console.log(s.containsInitialValue(8,8));
+
