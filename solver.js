@@ -2,10 +2,10 @@
 
 
 var Sudoku = function(initialBoard) {
-
+  
+  this.initialBoard = initialBoard;
   // Clone the entire initialBoard
-  this.board = JSON.parse(JSON.stringify(initialBoard));
-
+  this.board = JSON.parse(JSON.stringify(this.initialBoard));
 
 };
 
@@ -87,6 +87,13 @@ Sudoku.prototype.hasBoardConflict = function() {
   return false;
 };
 
+Sudoku.prototype.containsInitialValue = function(row, col) {
+  if (this.initialBoard[row][col]) {
+    return true;
+  }
+  return false;
+};
+
 
 //console.log(hasRowConflict(board, 0));
 //console.log(hasColConflict(board, 0));
@@ -125,3 +132,4 @@ var s = new Sudoku(easyBoard2);
 
 console.log(s.hasBoardConflict());
 console.log(s.board);
+console.log(s.containsInitialValue(8,8));
