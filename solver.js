@@ -94,11 +94,20 @@ Sudoku.prototype.containsInitialValue = function(row, col) {
   return false;
 };
 
+Sudoku.prototype.updateCell = function(row, col, val) {
+  if (this.initialBoard[row][col]) {
+    console.error('Error: Attempted to update an initial board cell');
+  } else {
+    this.board[row][col] = val;
+  }
+};
+
 Sudoku.prototype.resetCell = function(row, col) {
   if (this.initialBoard[row][col]) {
-    console.error('Error: Attempted to alter an initial board cell');
-  }
-  this.board[row][col] = 0;
+    console.error('Error: Attempted to reset an initial board cell');
+  } else {
+    this.board[row][col] = 0;  
+  }  
 };
 
 Sudoku.prototype.resetBoard = function() {
@@ -111,6 +120,18 @@ Sudoku.prototype.resetBoard = function() {
   }
 };
 
+// Sudoku.prototype.solve = function() {
+
+//   var nums = [1,2,3,4,5,6,7,8,9];
+
+
+//   nums.forEach(function(num) {
+//     this.board
+//   });
+
+
+
+// };
 
 //console.log(hasRowConflict(board, 0));
 //console.log(hasColConflict(board, 0));
@@ -138,9 +159,9 @@ console.log(s.hasBoardConflict());
 console.log(s.board);
 console.log(s.containsInitialValue(8,8));
 
-s.board[8][8] = 9;
-s.board[7][8] = 9;
-s.board[0][8] = 9;
+s.updateCell(8,8,9);
+s.updateCell(7,8,9);
+s.updateCell(0,8,9);
 
 console.log(s.board);
 
