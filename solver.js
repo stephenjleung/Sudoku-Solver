@@ -10,7 +10,7 @@ var board = [
   [null, null, null, null, null, null, null, null, null],
   [null, null, null, null, null, null, null, null, null],
   [null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null]
 
 ];
 
@@ -70,7 +70,30 @@ var hasBlockConflict = function(board, blockNum) {
   return false;
 };
 
+var hasBoardConflict = function(board) {
+  for (var i = 0; i < 9; i++) {
+    if (hasRowConflict(board, i)) {
+      return true;
+    }
+  }
+
+  for (var i = 0; i < 9; i++) {
+    if (hasColConflict(board, i)) {
+      return true;
+    }
+  }
+
+  for (var i = 0; i < 9; i++) {
+    if (hasBlockConflict(board, i)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 
 //console.log(hasRowConflict(board, 0));
 //console.log(hasColConflict(board, 0));
-console.log(hasBlockConflict(board, 0));
+//console.log(hasBlockConflict(board, 0));
+console.log(hasBoardConflict(board));
