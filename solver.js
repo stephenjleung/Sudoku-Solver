@@ -120,24 +120,45 @@ Sudoku.prototype.resetBoard = function() {
   }
 };
 
-// Sudoku.prototype.solve = function() {
+Sudoku.prototype.solve = function() {
 
-//   var nums = [1,2,3,4,5,6,7,8,9];
+  var nums = [1,2,3,4,5,6,7,8,9];
+  var blockNum;
+  var totalCells = this.board.length * this.board[0].length;
+  console.log(totalCells);
+  // nums.forEach(function(num) {
+    
+  //   this.updateCell(i, j, num);
 
+  //   blockNum = Math.floor(i / 3) * 3 + Math.floor(j / 3);
 
-//   nums.forEach(function(num) {
-//     this.board
-//   });
+  //   if (this.hasRowConflict(i) || this.hasColConflict(j) || this.hasBlockConflict(blockNum)) {
+  //     // there is a conflict; reset the cell and try next number
+  //   }
 
+  // });
 
-
-// };
+};
 
 //console.log(hasRowConflict(board, 0));
 //console.log(hasColConflict(board, 0));
 //console.log(hasBlockConflict(board, 0));
-//console.log(hasBoardConflict(board));
+// console.log(hasBoardConflict(board));
 
+// Do Not Edit
+// var easyBoard = [
+
+//   [5, 1, 0, 0, 0, 0, 0, 0, 0],
+//   [2, 0, 4, 0, 0, 9, 0, 0, 1],
+//   [0, 9, 6, 0, 1, 0, 0, 8, 0],
+//   [0, 0, 8, 2, 0, 0, 4, 9, 5],
+//   [0, 5, 0, 9, 0, 0, 0, 0, 3],
+//   [9, 3, 0, 0, 0, 1, 8, 6, 0],
+//   [3, 0, 0, 0, 9, 0, 7, 0, 0],
+//   [0, 0, 9, 1, 5, 4, 2, 0, 0],
+//   [6, 2, 0, 7, 0, 8, 0, 5, 0]
+
+// ];
 
 var easyBoard = [
 
@@ -156,15 +177,17 @@ var easyBoard = [
 var s = new Sudoku(easyBoard);
 
 console.log(s.hasBoardConflict());
-console.log(s.board);
-console.log(s.containsInitialValue(8,8));
+// console.log(s.board);
+// console.log(s.containsInitialValue(8,8));
 
-s.updateCell(8,8,9);
-s.updateCell(7,8,9);
-s.updateCell(0,8,9);
+// s.updateCell(8,8,9);
+// s.updateCell(7,8,9);
+// s.updateCell(0,8,9);
+// console.log(s.hasBoardConflict());
+// console.log(s.board);
 
-console.log(s.board);
+// s.resetBoard();
 
-s.resetBoard();
+// console.log(s.board)
 
-console.log(s.board)
+s.solve();
