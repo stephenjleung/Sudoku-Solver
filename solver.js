@@ -154,7 +154,7 @@ Sudoku.prototype.solve = function() {
 
     } else {
 
-      for (var num = 1; i <= 9; i++) {
+      for (var num = 1; num <= 9; num++) {
 
         if (solutionFound) {
           return;
@@ -238,7 +238,7 @@ console.log(s.board);
 s.solve();
 
 // performance testing
-for (var i = 0; i < 10000000; i++) {
+for (var i = 0; i < 10000; i++) {
   s.resetBoard();
   s.solve();
 };
@@ -249,3 +249,5 @@ console.log(s.board);
 // Revision. Changed the forEach to a for loop for easy breaking when solution found.
 //    This finishes 1000 solve iterations in 0.2 seconds.
 //    10,000,000 solves in 4.6 seconds
+// Update; previous revision was incorrect. Bugs found. Changing to for loop only 
+//    reduced time from 1.1 to 1.0 seconds for 1000 iterations. 10000 iterations is 8.5sec
