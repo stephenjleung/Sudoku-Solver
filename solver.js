@@ -122,7 +122,6 @@ Sudoku.prototype.resetBoard = function() {
 
 Sudoku.prototype.solve = function() {
 
-  var nums = [1,2,3,4,5,6,7,8,9];
   var blockNum;
   var totalCells = this.board.length * this.board[0].length;  
   var row = 0;
@@ -134,14 +133,15 @@ Sudoku.prototype.solve = function() {
 
   
   var solver = function(currentCell) {
-    
-    if (solutionFound) {
-      return;
-    }
+
+    // this doesn't seem to improve performance    
+    // if (solutionFound) {
+    //   return;
+    // }
     
     if (currentCell === 81) {      
       solution = JSON.parse(JSON.stringify(context.board));
-      solutionFound = true;
+      solutionFound = true;      
       return;
     };
 
@@ -154,7 +154,7 @@ Sudoku.prototype.solve = function() {
 
     } else {
 
-      nums.forEach(function(num) {
+      for (var num = 1; i <= 9; i++) {
 
         if (solutionFound) {
           return;
@@ -176,7 +176,7 @@ Sudoku.prototype.solve = function() {
           solver(currentCell + 1);          
 
         }
-      });      
+      }     
     }
   };    
 
@@ -238,11 +238,14 @@ console.log(s.board);
 s.solve();
 
 // performance testing
-// for (var i = 0; i < 1000; i++) {
-//   s.resetBoard();
-//   s.solve();
-// };
+for (var i = 0; i < 10000000; i++) {
+  s.resetBoard();
+  s.solve();
+};
 
 console.log(s.board);
 
-//This version solves and resets this easy puzzle 1000 times in 1.1 seconds
+// The first version solves and resets this easy puzzle 1000 times in 1.1 seconds
+// Revision. Changed the forEach to a for loop for easy breaking when solution found.
+//    This finishes 1000 solve iterations in 0.2 seconds.
+//    10,000,000 solves in 4.6 seconds
