@@ -124,19 +124,64 @@ Sudoku.prototype.solve = function() {
 
   var nums = [1,2,3,4,5,6,7,8,9];
   var blockNum;
-  var totalCells = this.board.length * this.board[0].length;
-  console.log(totalCells);
-  // nums.forEach(function(num) {
+  var totalCells = this.board.length * this.board[0].length;  
+  var row = 0;
+  var col = 0;
+  var context = this;
+
+  var solution;
+  var solutionFound = false;
+
+  
+  var solver = function(currentCell) {
     
-  //   this.updateCell(i, j, num);
+    if (solutionFound) {
+      return;
+    }
+    
+    if (currentCell === 81) {      
+      solution = JSON.parse(JSON.stringify(context.board));
+      solutionFound = true;
+      return;
+    };
 
-  //   blockNum = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+    row = Math.floor(currentCell / 9);
+    col = Math.floor(currentCell % 9);
 
-  //   if (this.hasRowConflict(i) || this.hasColConflict(j) || this.hasBlockConflict(blockNum)) {
-  //     // there is a conflict; reset the cell and try next number
-  //   }
+    if (context.containsInitialValue(row, col)) {
 
-  // });
+      solver(currentCell + 1);
+
+    } else {
+
+      nums.forEach(function(num) {
+
+        if (solutionFound) {
+          return;
+        }
+
+        row = Math.floor(currentCell / 9);
+        col = Math.floor(currentCell % 9);        
+        
+        context.updateCell(row, col, num);
+
+        blockNum = Math.floor(row / 3) * 3 + Math.floor(col / 3);
+
+        if (context.hasRowConflict(row) || context.hasColConflict(col) || context.hasBlockConflict(blockNum)) {
+
+          context.resetCell(row, col);
+
+        } else {
+
+          solver(currentCell + 1);          
+
+        }
+      });      
+    }
+  };    
+
+  solver(0);
+  return solution;
 
 };
 
@@ -176,8 +221,8 @@ var easyBoard = [
 
 var s = new Sudoku(easyBoard);
 
-console.log(s.hasBoardConflict());
-// console.log(s.board);
+//console.log(s.hasBoardConflict());
+console.log(s.board);
 // console.log(s.containsInitialValue(8,8));
 
 // s.updateCell(8,8,9);
@@ -191,3 +236,13 @@ console.log(s.hasBoardConflict());
 // console.log(s.board)
 
 s.solve();
+
+// performance testing
+// for (var i = 0; i < 1000; i++) {
+//   s.resetBoard();
+//   s.solve();
+// };
+
+console.log(s.board);
+
+//This version solves and resets this easy puzzle 1000 times in 1.1 seconds
