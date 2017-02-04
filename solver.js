@@ -173,7 +173,7 @@ Sudoku.prototype.solve = function() {
 
         } else {
 
-          solver(currentCell + 1);          
+          solver(currentCell + 1);
 
         }
       }     
@@ -238,10 +238,10 @@ console.log(s.board);
 s.solve();
 
 // performance testing
-for (var i = 0; i < 10000; i++) {
-  s.resetBoard();
-  s.solve();
-};
+// for (var i = 0; i < 10000; i++) {
+//   s.resetBoard();
+//   s.solve();
+// };
 
 console.log(s.board);
 
